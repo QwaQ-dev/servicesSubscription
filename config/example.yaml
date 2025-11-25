@@ -1,0 +1,10 @@
+env: "dev"
+server:
+  port: ":8080"
+database:
+  host: "db"
+  port: "5432"
+  db_name: "subscriptions"
+  db_password: "postgres"
+  db_username: "postgres"
+  sslmode: "disable"

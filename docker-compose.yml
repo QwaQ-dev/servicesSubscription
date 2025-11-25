@@ -1,0 +1,43 @@
+
+services:
+  backend:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - CONFIG=config/example.yaml
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - prod_network
+
+  db:
+    image: postgres
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d subscriptions"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=subscriptions
+      - PGDATA=/var/lib/postgresql/data
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - prod_network
+
+volumes:
+  pgdata:
+
+networks: 
+  prod_network:
+    driver: bridge
