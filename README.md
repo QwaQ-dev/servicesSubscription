@@ -21,7 +21,7 @@
 - GET `/api/v1/subscriptions/{id}` — получить подписку
 - PUT `/api/v1/subscriptions/{id}` — обновить подписку
 - DELETE `/api/v1/subscriptions/{id}` — удалить подписку
-- GET `/api/v1/subscriptions` — список (пагинация, фильтры: `user_id`, `service_name`)
+- GET `/api/v1/subscriptions` — список подписок
 - GET `/api/v1/subscriptions/summ` — суммарная стоимость за период
 
 Формат даты начала/окончания: `MM-YYYY` (пример: `07-2025`). Стоимость — целое число (рубли).
